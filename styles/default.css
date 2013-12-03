@@ -5,7 +5,6 @@ body {
 	margin: auto;
 	width: 600px;
 	}
-code {
+sup {
 	color: #888;
-	position: relative; top: -0.5em; font-size: 80%;
 	}

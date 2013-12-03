@@ -5,11 +5,19 @@ import csv
 import argparse
 
 def parseText(t):
-    t = t.replace("\\n", "\n")
+
+    t = t.replace("\\n\\q", " \n\n\t")
+    t = t.replace("\\n", " \n")
     t = t.replace("\\q", "\t")
-    t = t.replace("\\p", "\n\n")
+    t = t.replace("\\p", " \n\n")
 
     return t
+
+def addMark(t):
+    i = -1
+    while t[i] in ["\n", "\t"]:
+        i -= 1
+    return t[:i] + " °" + t[i:]
 
 def getText(book, startChapter, startVerse, endChapter, endVerse, title, showVerses, showMarks):
     r = ""
@@ -20,9 +28,10 @@ def getText(book, startChapter, startVerse, endChapter, endVerse, title, showVer
             if row[0] == startChapter and row[1] == startVerse:
                 within = True
             if within:
-                    rr = parseText(row[2]) + " "
-                    if showVerses: rr = " ``{}:{}`` ".format(row[0], row[1]) + rr
-                    if showMarks and not showVerses: rr = rr + " ``°`` "
+                    rr = parseText(row[2])
+                    if rr[-1] != "\n": rr += " "
+                    if showVerses: rr = ":sup:`{}:{}`\xc2\xa0".format(row[0], row[1]) + rr
+                    if showMarks and not showVerses: rr = addMark(rr)
                     r += rr
                     #r += "({}:{}) ".format(row[0], row[1])
             if row[0] == endChapter and row[1] == endVerse:
@@ -30,7 +39,8 @@ def getText(book, startChapter, startVerse, endChapter, endVerse, title, showVer
     return r
 
 def addTitle(row):
-    return "\n\n" + "=" * int(row[1]) + row[6] + "=" * int(row[1]) + "\n"
+    charSet = "#=-~_"
+    return "\n\n" + row[6] + "\n" + charSet[int(row[1])] * len(row[6]) + "\n"
 
 
 if __name__ == "__main__":
@@ -51,7 +61,7 @@ if __name__ == "__main__":
     showVerse = args.v
     showMarks = args.m
 
-    text = "\n\n%!encoding: UTF-8\n"
+    text = ""
 
     with open('plans/' + plan + ".csv", 'rb') as csvfile:
         reader = csv.reader(csvfile, delimiter=',', quotechar='"')
