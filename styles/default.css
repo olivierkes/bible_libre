@@ -1,0 +1,11 @@
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,700italic);
+body {
+	font-family: 'Open Sans', sans-serif;
+	margin: auto;
+	width: 600px;
+	}
+code {
+	color: #888;
+	position: relative; top: -0.5em; font-size: 80%;
+	}
