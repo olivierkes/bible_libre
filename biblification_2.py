@@ -41,7 +41,7 @@ if __name__ == "__main__":
     def getText(book, startChapter, startVerse, endChapter, endVerse):
         "Renvoie le texte demandé."
         r = ""
-        f = open('textes/' + book + "_2.txt", 'r')
+        f = open('textes/' + book + ".txt", 'r')
         text = f.read()
         f.close()
         start = text.find("[{}:{}]".format(startChapter, startVerse))
