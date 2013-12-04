@@ -4,15 +4,23 @@ bible-libre
 Une Bible en français, libre.
 
 
-Rendu avec biblification.py
+Rendu avec biblification_2.py
 ---------------------------
 
-biblification.py renvoie un fichier txt2tags (http://txt2tags.org)
+biblification_2.py renvoie un fichier rst.
 
-Utilisation, par exemple:
+Par exemple:
 
-     python biblification.py -v   > rendu.t2t 
+     python biblification_2.py -tv -p nouveau-testament-commente  > rendu.t2t 
 
-Le rendu se fait ensuite avec txt2tags, par exemple:
+Usage: 
 
-     txt2tags -t html --style styles/default.css rendu.t2t 
+     biblification_2.py [-h] [-p PLAN] [-v] [-m] [-t]
+
+Optional arguments:
+
+-h, --help             show this help message and exit
+-p PLAN                plan to be used
+-v                     show verses references
+-m                     show marks only
+-t                     show references in titles
