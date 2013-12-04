@@ -8,6 +8,11 @@ all:
 
 rst : 
 	python biblification.py -v > rendu.rst
+	
+rst2 : 
+	python biblification_2.py -v > rendu.rst
+	
+
 
 html:
 	rst2html --stylesheet=styles/default.css rendu.rst > rendu.html
