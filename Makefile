@@ -1,35 +1,24 @@
 
 
 all: 	
-	make rst2
+	make rendu.rst
 	make html
-	make tex
+	make rendu.tex
 	make clean
-
-rst : 
-	python biblification.py -v > rendu.rst
 	
-rst2 : 
+rendu.rst : 
 	python biblification_2.py -t > rendu.rst
 	
 
 
-html:
-	python biblification_2.py -tv > rendu.rst
+html: rendu.rst 
 	rst2html --stylesheet=styles/default.css rendu.rst > rendu.html
-	make clean
-	rm rendu.rst
 
-tex:
-	python biblification_2.py -t > rendu.rst
+rendu.tex: rendu.rst
 	rst2xetex rendu.rst > rendu.tex
-	rm rendu.rst
 
-pdf:
-	make tex
+pdf: rendu.rst rendu.tex
 	-xelatex rendu.tex
-	rm -f rendu.rst rendu.tex
-	make clean
 
 clean:
 	rm -f rendu.aux rendu.log rendu.out rendu.toc
