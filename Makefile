@@ -2,27 +2,27 @@
 
 all: 	
 	make rendu.rst
-	make html
+	make rendu.html
 	make rendu.tex
 	make clean
 	
-rendu.rst : 
+%.rst : 
 	python biblification_2.py -t > rendu.rst
 	
+%.html: %.rst 
+	rst2html --stylesheet=styles/default.css $*.rst > $*.html
 
+%.tex: %.rst
+	rst2xetex $*.rst > $*.tex
 
-html: rendu.rst 
-	rst2html --stylesheet=styles/default.css rendu.rst > rendu.html
-
-rendu.tex: rendu.rst
-	rst2xetex rendu.rst > rendu.tex
-
-pdf: rendu.rst rendu.tex
-	-xelatex rendu.tex
+%.pdf: %.tex
+	-xelatex $*.tex
 
 clean:
-	rm -f rendu.aux rendu.log rendu.out rendu.toc
+	rm -f *.aux *.log *.out *.toc
 
-clean-all:
+# On efface pas les fichiers de manière générique pour le moment.
+# Pour garder les autres choses du dépôt ;)
+mrproper:
 	make clean
 	rm -f rendu.rst rendu.html rendu.pdf
