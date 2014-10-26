@@ -1,0 +1,3 @@
+[submodule "bible_libre.wiki"]
+	path = bible_libre.wiki
+	url = git@github.com:olivierkes/bible_libre.wiki.git
