@@ -1,0 +1,28 @@
+html {
+    font-family: "Sans Serif";
+    font-size: 100%;
+    line-height: 1.5;
+}
+
+p {
+    line-height: 1.5;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+}
+
+div#content {
+    max-width: 35em;
+    margin: auto;
+}
+
+div.outline-2, div.outline-3, div.outline-4 {
+    margin-left: 3em;
+}
+
+
+
+h1, h2, h3, h4 {
+    font-weight: 400;
+}
